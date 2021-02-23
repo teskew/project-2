@@ -1,0 +1,33 @@
+
+
+mvc
+it is conventional
+controller 
+
+intererface
+  user can view order form
+  user can sumbmit order form
+  user can edit order
+  user can delete/cancel order
+User class
+  attribuites name, password
+  user sign up/log In
+  has many order
+user controller and views
+   '/users/signup' renders sign up form
+    '/users/signup' processer sign up form, creat user, post
+    '/users/login' renders login form
+    '/users/login' processer login form, post
+    need to set sessions
+    user can view their order, '/user/:id/order'
+order class
+    attribuites address, item,item_price, total
+    order belongs to user
+order controller and views
+    /order/new renders new order form
+    /order sumits order
+    /order renders all order
+    /order/:id renders one instance
+    /order / id/edit renders update form for instance
+    /order / id update instance
+    order/id/delete delate instance

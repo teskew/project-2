@@ -1,0 +1,23 @@
+class UserController < ApplicationController
+
+       get '/users/signup' do
+            erb :'/users/signup'  
+       end
+       
+       post '/users/signup' do
+         erb :'/users/signup' 
+         @user= User.create(username: params[:username], password: params[:password])
+         redirect "/users/#{@user.id}"
+        
+       end
+       #show page
+       get '/users/:id' do
+        
+         @user = User.find(params[:id])
+         erb :'/users/show' 
+        end
+
+
+  
+  end 
+  
