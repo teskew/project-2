@@ -6,27 +6,36 @@ class OrderController < ApplicationController
        # <% %> = what our views process
    
        # user just requested all posts 
+       get '/orders' do 
+        @orders = Post.all
+        erb :'orders/index'
+    end
+
        #Create
        get '/orders/new' do 
            erb :'/orders/new'
        end 
        
-       post '/orders' do 
-        @order= Order.create(
+      
+     post '/orders' do 
+        @order = Order.create(
         name: params[:name], 
         address: params[:address],
         brewery_type: params[:brewery_type],
-        phone: params[:phone])
-         redirect "/orders/#{@order.id}"
-
+        phone: params[:phone]
+        )
+       redirect "/orders/#{@order.id}"
+       
        end 
 
       #read      # user just made a request to view form to add a new order
 
-          get "orders/:id" do
-            @order = Order.find(params[:id])
-            erb :'/orders/show'
-          end
+      get '/orders/:id' do 
+        # retrieve the requested post 
+        @order = Order.find(params[:id])
+        # show details of that post         
+        erb :'orders/show'
+    end 
       
    
  

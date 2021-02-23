@@ -9,8 +9,11 @@ class ApplicationController < Sinatra::Base
       set :views, 'app/views'
       enable :sessions 
       set :session_secret, "secret"
+  end
+   
+  get '/' do 
+    "welcome"
   end 
-
   # define general routes
   # any route/request that doesnt involve a model 
   
