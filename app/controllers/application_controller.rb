@@ -12,36 +12,10 @@ class ApplicationController < Sinatra::Base
   end
    
   get '/' do 
-    "welcome"
-  end 
-  # define general routes
-  # any route/request that doesnt involve a model 
-  
- # get '/' do 
-    # binding.pry
     
-  # erb :welcome
-
+    "|-- Well Come To Breweries Co Info -----|" 
   end
-  
+     
 
 
-
-
-
-
-  
-
-
-
-  #   def get_post do
-  #     @post = Post.find_by(id:params[:id])
-
-  #   end 
-  # end
-
-  
-
-  # about route
-  # contact page
-
+ end

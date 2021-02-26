@@ -1,0 +1,11 @@
+
+<% @orders.each do |order| %>
+  <p>  Order Number:<%= order.id %></p>
+  <p>  Order Name:<%= order.name %> </p>
+  <p>  Order address:<%= order.address %></p>
+  <p>  Order phone:<%= order.phone %><p> 
+  Username: <%= order.user %><p>
+  <br> </br>
+<% end %>
+
+

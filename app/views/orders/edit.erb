@@ -1,0 +1,11 @@
+
+       <h1> This is the edit form </h1>
+
+<form action="/orders/<%= @order.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">form action='/orders' method= "POST">
+    Name of the company: <input type=text name="name"><br></br>
+    Address: <input type=address name="address"><br></br>
+    Brewery_type: <input type=text name="brewery_type"><br></br>
+    Phone: <input type=number name="phone"><br></br>
+     <input type=submit>
+     <form>   
