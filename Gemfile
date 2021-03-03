@@ -14,7 +14,7 @@ gem 'bcrypt'
 gem 'sinatra'
 gem 'tux'
 gem 'thin'
-
+gem 'sinatra-flash'
 group :test do
   gem 'rspec'
   gem 'capybara'

@@ -1,8 +1,13 @@
-<h1>  YOUR ORDER </h1>
-
-Name of the Company: <%= @order.name %><br>
-Address: <%= @order.address %><br>
-Brewery_type: <%= @order.brewery_type %><br>
+Name: <%= @order.name %><br>
+Address: <%=@order.address %><br>
+Brewery Type: <%=@order.brewery_type %><br>
 Phone: <%= @order.phone %><br>
+ 
 
 
+<p><a href="/orders/<%= @order.id %>/edit"><input type="submit" value="Edit Order"></p>
+
+<form action="/orders/<%= @order.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Order">
+</form>

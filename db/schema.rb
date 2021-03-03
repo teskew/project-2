@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_25_190255) do
+ActiveRecord::Schema.define(version: 2021_03_01_153309) do
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "orders", force: :cascade do |t|
     t.string "name"
@@ -18,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_02_25_190255) do
     t.string "brewery_type"
     t.string "phone"
     t.integer "user_id"
+    t.integer "company_id"
   end
 
   create_table "users", force: :cascade do |t|

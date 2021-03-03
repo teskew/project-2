@@ -1,157 +1,72 @@
 class OrderController < ApplicationController
 
   
-    # all routes pertaining to order model 
-#creat   
-     get '/orders/new' do 
-             erb :'/orders/new'
-        end 
-        
-    post '/orders' do
-             @order = Order.create(
-             name: params[:name],
-             address: params[:address],
-             brewery_type: params[:brewery_type],
-             phone: params[:phone])
-            redirect "/orders/#{order.id}" 
-         end 
-#    # read
-    get '/orders/:id' do              
-         # retrieve the requested post 
-         @order = Order.find(params[:id])        
-        erb :'/orders/show'
-     end 
-     
-     get '/orders' do 
-          @orders = Order.all
-          erb :'orders/index'
-     end 
-   #update 
+    # requested all  order  
+ 
+get '/orders' do 
+ 
+    @orders = Order.all
+  
+  erb :'orders/index'
+ end 
+
+#  # user just made a request to view form to add a new Order
+   get '/orders/new' do 
+     erb :'orders/new'
+  end 
+
+#  # user wants to see details of 1 Order
+  
+  get '/orders/:id' do 
+      get_Order
+     erb :'orders/show'
+  end
+
+  post '/orders' do
+   @order = Order.new(params)
+    @order.user_id = session[:user_id]
+     # user=User.find(session[:user_id])
+     @order.save
+     redirect "/orders/#{@order.id}"
+  end
+
    get '/orders/:id/edit' do 
-        @order = Order.find_by(id:params[:id])           
-         
-           erb :"/orders/edit"
-     end 
-
-     post '/orders/:id' do 
-           @order = Order.find_by(id:params[:id])
-           @order.update(
-            name: params[:name],
-            address: params[:address],
-            brewery_type: params[:brewery_type],
-            phone: params[:phone])
-            redirect "/orders/#{order.id}" 
-           
-      end 
-
-      
-
-      
-
-    
- #    get '/orders' do 
-
-#                 #         @order = Order.find_by(id:params[:id])
-#                 #            redirect_if_not_authorized
-#                 #            @order.update(title: params[:title], content: params[:content])
-#                 #            redirect "/orders/#{@post.id}" 
-#                 #            # @post.update
-#                 #            # no view 
-#                 #            # update the particular object with new attributes
-#      end 
-
- end
-
-
-
-        
-
-
-
-       
-        
-
-# #        #index route
-# #        
+    get_Order
+    redirect_if_not_authorized
+        erb :"/orders/edit"
+     
+   end
+  
+   patch '/orders/:id' do 
+      get_order
+      redirect_if_not_authorized
+     
+     # redirect '/orders'
+  
+      @order.update(name: params[:name], address: params[:address], brewery_type: params[:brewery_type], phone: params[:phone])
+      redirect "/orders/#{@order.id}" 
    
-#        # user just made a request to view form to add a new post
-#        get '/orders/new' do 
-#            erb :'orders/new'
-#        end 
-   
-#        # show route
-#        get '/orders/:id' do 
+  end
+  delete '/orders/:id' do 
+    get_order
+    @order.destroy
+    redirect '/orders'
+    # no view 
+end 
 
 
+private 
 
-#         # @order = Order.find_by(id:params[:id])
-#         #    erb :'orders/show'
-#            # # retrieve the requested post 
-#            # @post = Post.find(params[:id])
-#            # # show details of that post         
-#            # erb :'posts/show'
-#        end 
-   
-#        # user wants to see details of 1 post
-#        # show route
-   
-#        # our user just submitted the new post form 
-       
-   
-#        # our user just requested to see an edit form for a post
-   
-#  
-   
-#        # user just submitted the edit form
-#        patch '/orders/:id' do 
-#         @order = Order.find_by(id:params[:id])
-#            redirect_if_not_authorized
-#            @order.update(title: params[:title], content: params[:content])
-#            redirect "/orders/#{@post.id}" 
-#            # @post.update
-#            # no view 
-#            # update the particular object with new attributes
-#        end 
-   
-#        # user wants to delete an existing post 
-#        delete '/orders/:id' do 
-#         @order = Order.find_by(id:params[:id])
-#            @order.destroy
-#            redirect '/orders'
-#            # no view 
-#        end 
-   
-#    private 
-   
-#        def get_order
-#            @order = Order.find_by(id:params[:id])
-#        end 
-   
-#        def redirect_if_not_authorized
-#            if @order.author != current_user
-#                flash[:error] = "You cant make this edit, you don't own this"
-#                redirect '/orders'
-#            end 
-   
-#        end 
-   
-#    end 
-#    # ERB tags: 
-#    # <%= %> = what our user sees
-#    # <% %> = what our views process
+def get_Order 
+  @order = Order.find_by(id:params[:id])
+end 
 
-#    # user just requested all posts 
-#    #index route
-# #        get '/posts' do 
-# #            @posts = Post.all
-# #            erb :'posts/index'
-# #        end 
+def redirect_if_not_authorized
+  if @order.user != current_user
+      flash[:error] = "You cant make this edit, you don't own this"
+     # redirect '/Orders'
+  end 
 
-# #        # user just made a request to view form to add a new post
-# #        get '/posts/new' do 
-# #            erb :'posts/new'
-# #        end 
+end 
 
-# #        # user wants to see details of 1 post
-# #        # show route
-# #        
+end    

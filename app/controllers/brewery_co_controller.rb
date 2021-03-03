@@ -1,6 +1,0 @@
-class BreweryCoController < ApplicationController
-
-   
-end
-
-
