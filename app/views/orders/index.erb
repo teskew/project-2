@@ -1,17 +1,18 @@
 
-
+<h3> Please select our companies to edit </h3>
  
 <% @orders.each do |p| %>
-Name of the Company: <%= p.name %><br>
+<p>Name of the Company: <%= p.name %> - <%= p.id %><br>
 Address:             <%= p.address %><br>
 Brewery_type:        <%= p.brewery_type %> <br>    
 Phone:               <%= p.phone %> <br> 
-
-<if User.find(session(:user_id))== p.user %>
-<a href="/orders/<%= p.id %>/edit"></a>   
-<br></br> 
+  
+<% if current_user == p.user %>
+        <a href="/orders/ <%= p.id %>edit">Edit</a><br>
+        <a href="/orders/<%= p.id %>delete">Delete</a>
+    <% end %>
+  </p>
 <% end %>
-
 
 
 

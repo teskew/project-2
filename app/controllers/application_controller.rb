@@ -22,7 +22,12 @@ class ApplicationController < Sinatra::Base
     # return the logged in user
    def current_user # return logged in user 
     @current_user ||= User.find_by_id(session[:user_id]) #memoization
-   end 
+   end
+   
+   def logout
+      session.clear
+   end
+
 
     # check if a user logged in
     def logged_in?

@@ -3,25 +3,40 @@ class UserController < ApplicationController
     # responsible for anything involving our Users
 
     get '/signup' do # render signup form
-        erb :"users/signup"
+        
+        erb :"/users/signup"
+        
     end 
 
     post '/signup' do # process the signup form
+        user = User.new(params)
        
         # receive data from the form inside of params hash
         # create a new Users object with the data
-       user = User.new(params)
-#         # validate our Users object
-#         # if Users.username != ""
-      if user.username.blank? || user.email.blank? || user.name.blank? || user.password.blank? || User.find_by_email(params[:email]) || User.find_by_username(params[:username])
-             redirect '/signup'
-        else 
-             user.save
-            session[:users_id] = user.id # logging user in
-             redirect '/orders'
-        end 
-         end 
+       if params["username"].blank? || params["password"].blank? 
+       
+        flash[:error] = "The input  can't be blank"
+        #  if  current_user == User.find_by_username(params[:username]) &&  password == User.authenticate(params[:password]) 
+        erb :"/users/signup"
+        
+        
+        
+    elsif  User.find_by_username(params[:username]) 
+        
+        flash[:error] = "Your account is on file pls login"
+        #         # validate our Users object
+        #         # if Users.username != 
+        redirect '/login'
+      else 
 
+             user.save
+             session[:users_id] = user.id 
+             
+             # logging user in
+             redirect '/'
+    
+         end 
+        end
     
 #     # login '/login' read => querying our Users and reading users attributes
 
@@ -50,10 +65,22 @@ class UserController < ApplicationController
         end 
      end 
 
+     delete '/logout' do
+        if session[:user_id] != nil
+            session.distroy
+            redirect '/'
+        else
+            redirect '/orders'
+        end
+    end
+
+
     get '/logout' do
-         session.clear
-        redirect '/login'
+        logout
+        redirect '/'
     end 
+
+
 
 #     # logout  'logout' delete => clears our session
  end 

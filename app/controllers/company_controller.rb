@@ -1,7 +1,4 @@
 class CompanyController < ApplicationController
  
-
-   
 end
-
 
