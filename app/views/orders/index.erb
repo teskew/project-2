@@ -1,5 +1,5 @@
 
-<h3> Please select our companies to edit </h3>
+<h3> New user To Edit or Delete go to A New Account </h3>
  
 <% @orders.each do |p| %>
 <p>Name of the Company: <%= p.name %> - <%= p.id %><br>
@@ -8,8 +8,8 @@ Brewery_type:        <%= p.brewery_type %> <br>
 Phone:               <%= p.phone %> <br> 
   
 <% if current_user == p.user %>
-        <a href="/orders/ <%= p.id %>edit">Edit</a><br>
-        <a href="/orders/<%= p.id %>delete">Delete</a>
+        <a href="/orders/ <%= p.id %>edit"><input type=submit value="Edit"</a><br>
+        <a href="/orders/<%= p.id %>delete"><input type=submit value="Delete"</a>
     <% end %>
   </p>
 <% end %>

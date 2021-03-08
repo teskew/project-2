@@ -18,9 +18,9 @@
            <h1>Brewery Companies Information </h1>
            
     
-                      <% flash.keys.each do |type| %>
-            <div data-alert class="flash <%= type %> alert-box radius">
-                    <%= flash[type] %>
+                 <% flash.keys.each do |type| %>
+                     <div data-alert class="flash <%= type %> alert-box radius">
+                  <%= flash[type] %>
                    
             </div>
                  <% end %>
@@ -29,12 +29,13 @@
                 <div> 
                 <a href="/"> Home</a>
                 <% if logged_in? %>
-                <a href="/users"> Custemers</a>
-                <a href="/orders "> Companies </a>
+               
+                <a href="/orders "> Companies ||</a>
+                <a href="/orders/new "> New-Account|| </a>
                 <a href="/logout ">Logout</a>
                 <% else %>
-                <a href="/signup">Sign In | |</a>
-                <a href="/login ">Log In</a>
+                <a href="/signup"> Sign Up !!</a>
+                <a href="/login "> Log In </a>
                 <% end %>
               <div class="wrapper">
             

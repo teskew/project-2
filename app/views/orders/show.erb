@@ -5,7 +5,7 @@ Phone: <%= @order.phone %><br>
  
 
 
-<a href="/orders/<%= @order.id %>/edit">Edit Order</a>
+<a href="/orders/<%= @order.id %>/edit"><input type=Submit value="Edit Order"></a>
 
 <form action="/orders/<%= @order.id %>" method="POST">
     <input type="hidden" name="_method" value="delete">

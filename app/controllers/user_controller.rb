@@ -15,7 +15,7 @@ class UserController < ApplicationController
         # create a new Users object with the data
        if params["username"].blank? || params["password"].blank? 
        
-        flash[:error] = "The input  can't be blank"
+        flash[:error] = "THE INPUT IS BLANK"
         #  if  current_user == User.find_by_username(params[:username]) &&  password == User.authenticate(params[:password]) 
         erb :"/users/signup"
         
@@ -23,7 +23,7 @@ class UserController < ApplicationController
         
     elsif  User.find_by_username(params[:username]) 
         
-        flash[:error] = "Your account is on file pls login"
+        flash[:error] = "YOUR ACCOUNT IS ON THE FILE PROCED TO LOGIN"
         #         # validate our Users object
         #         # if Users.username != 
         redirect '/login'

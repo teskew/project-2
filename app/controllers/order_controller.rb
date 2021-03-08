@@ -21,10 +21,13 @@ get '/orders' do
 #  # user wants to see details of 1 Order
   
   get '/orders/:id' do 
-    get_order
+   if get_order != nil
      erb :'/orders/show'
+   else
+    
+    erb :"/error"
   end
-
+end
   post '/orders' do
 
    @order = Order.new(params)
@@ -69,7 +72,7 @@ end
 
 def redirect_if_not_authorized
   if @order.user != current_user
-      flash[:error] = "You cant make this edit/delete, you don't own this"
+      flash[:error] = "You can't edit or delete pls go to new Account "
       redirect '/orders'
   end 
 

@@ -12,11 +12,21 @@ class ApplicationController < Sinatra::Base
       enable :sessions 
       set :session_secret, "secret"
       register Sinatra::Flash
+       set :show_exceptions, false
    end
+    not_found do
+  status 404
+  erb :error
+    end
+
+
    get "/" do 
     erb :welcome
   end
-
+  error ActiveRecord::RecordNotFound do
+    redirect  '/'
+  end
+  
   helpers do # makes these methods availble to controller and views
     
     # return the logged in user
