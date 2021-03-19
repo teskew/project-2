@@ -4,22 +4,25 @@ class OrderController < ApplicationController
     # requested all  order  
  
 get '/orders' do 
- 
-    @orders = Order.all
-  
-  erb :'/orders/index'
-
+   if @orders = current_user
+     @orders = Order.all
+   erb :'/orders/index'
+   else
+    flash[:error] = "pls login or signup"
+   redirect '/'
+  end
  end 
 
 #  # user just made a request to view form to add a new Order
    get '/orders/new' do 
-      
+    if @orders = current_user 
       erb :'/orders/new'
-    
-      
+    else
+      flash[:error] = "pls login or signup"
+      redirect '/'
       end
 #  # user wants to see details of 1 Order
-  
+    end
   get '/orders/:id' do 
    if get_order != nil
      erb :'/orders/show'

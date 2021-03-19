@@ -1,7 +1,6 @@
 class UserController < ApplicationController
 
-    # responsible for anything involving our Users
-
+    
     get '/signup' do # render signup form
         
         erb :"/users/signup"
@@ -16,10 +15,12 @@ class UserController < ApplicationController
        if params["username"].blank? || params["password"].blank? 
        
         flash[:error] = "THE INPUT IS BLANK"
-        #  if  current_user == User.find_by_username(params[:username]) &&  password == User.authenticate(params[:password]) 
-        erb :"/users/signup"
+        #  if  current _user == User.find_by_username(params[:username]) &&  password == User.authenticate(params[:password]) 
+    
+
+        redirect :"/users/signup"
         
-        
+    
         
     elsif  User.find_by_username(params[:username]) 
         
@@ -59,7 +60,7 @@ class UserController < ApplicationController
             redirect '/orders'
         else
 #              #flash[]
-            flash[:error] = "Invalid login"
+            flash[:error] = "Invalid login pls signup if you are new"
 #             # invalid login
             redirect '/login'
         end 
