@@ -1,67 +1,53 @@
 class UserController < ApplicationController
-
+#user can create, read, update and delete an order info
     
-    get '/signup' do # render signup form
-        
-        erb :"/users/signup"
-        
+    get '/signup' do 
+      if current_user
+      # @orders = Order.all
+      @orders = current_user.orders
+       erb :'/orders/index'
+     else
+       erb :"/users/signup"
+      end
     end 
 
-    post '/signup' do # process the signup form
-        user = User.new(params)
-       
-        # receive data from the form inside of params hash
-        # create a new Users object with the data
-       if params["username"].blank? || params["password"].blank? 
-       
-        flash[:error] = "THE INPUT IS BLANK"
-        #  if  current _user == User.find_by_username(params[:username]) &&  password == User.authenticate(params[:password]) 
-    
-
-        redirect :"/users/signup"
-        
-    
-        
+    post '/signup' do # process the signup form, creates user.
+          user = User.new(params)
+       if params["username"].blank? || params["password"].blank? || params["name"].blank? || params["email"].blank?   
+          flash[:error] = "THE INPUT IS BLANK"
+          redirect :"/users/signup"  
+          
     elsif  User.find_by_username(params[:username]) 
         
         flash[:error] = "YOUR ACCOUNT IS ON THE FILE PROCED TO LOGIN"
-        #         # validate our Users object
-        #         # if Users.username != 
         redirect '/login'
       else 
-
              user.save
              session[:users_id] = user.id 
-             
-             # logging user in
              redirect '/'
-    
          end 
         end
-    
-#     # login '/login' read => querying our Users and reading users attributes
 
-    get '/login' do # render the login form
-        #binding.pry
-        erb :"users/login"
-     
+
+    get '/login' do #render login form  
+     if current_user
+         #@orders = Order.all
+         @orders = current_user.orders
+
+         erb :'/orders/index'
+     else
+        erb :"/users/login"
+     end
     end 
 
-    post '/login' do # process the login form
-#         # gather data from the form => params
-#         # find my Users object
+    post '/login' do #process login, post
+        
          user = User.find_by_username(params[:username])
-       # binding.pry
-#         # if users exists && password is correct
         if user && user.authenticate(params[:password])
-#             # login user
              session[:user_id] = user.id
-#             # redirect 
             redirect '/orders'
         else
-#              #flash[]
-            flash[:error] = "Invalid login pls signup if you are new"
-#             # invalid login
+            flash[:error] = "Invalid login pls signup if you are new"  # invalid login
             redirect '/login'
         end 
      end 
@@ -80,8 +66,4 @@ class UserController < ApplicationController
         logout
         redirect '/'
     end 
-
-
-
-#     # logout  'logout' delete => clears our session
  end 

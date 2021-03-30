@@ -3,17 +3,18 @@ require './config/environment'
 # responsible for handling requests
 
 
-class ApplicationController < Sinatra::Base
+class ApplicationController < Sinatra::Base #inherited from 
     
   configure do 
-      # set sessions
-      set :public_folder, 'public'
-      set :views, 'app/views'
-      enable :sessions 
-      set :session_secret, "secret"
-      register Sinatra::Flash
+    
+       set :public_folder, 'public'
+       set :views, 'app/views'
+       enable :sessions 
+       set :session_secret, "secret"
+       register Sinatra::Flash
        set :show_exceptions, false
    end
+
     not_found do
     status 404
      erb :error
@@ -21,16 +22,16 @@ class ApplicationController < Sinatra::Base
 
 
      get "/" do 
-    erb :welcome
-  end
+         erb :welcome
+     end
+
    error ActiveRecord::RecordNotFound do
-    redirect  '/'
-  end
+     redirect  '/'
+   end
   
-  helpers do # makes these methods availble to controller and views
-    
+  helpers do 
     # return the logged in user
-   def current_user # return logged in user 
+   def current_user 
     @current_user ||= User.find_by_id(session[:user_id]) #memoization
    end
    
@@ -43,7 +44,6 @@ class ApplicationController < Sinatra::Base
     def logged_in?
       !!session[:user_id]
     end 
-
   end 
      
  end

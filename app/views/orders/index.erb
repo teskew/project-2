@@ -3,13 +3,13 @@
  
 <% @orders.each do |p| %>
 <p>Name of the Company: <%= p.name %> - <%= p.id %><br>
-Address:             <%= p.address %><br>
-Brewery_type:        <%= p.brewery_type %> <br>    
-Phone:               <%= p.phone %> <br> 
+    Address:          <%= p.address %><br>
+    Brewery_type:      <%= p.brewery_type %> <br>    
+    Phone:             <%= p.phone %> <br> 
   
 <% if current_user == p.user %>
-        <a href="/orders/ <%= p.id %>edit"><input type=submit value="Edit"</a><br>
-        <a href="/orders/<%= p.id %>delete"><input type=submit value="Delete"</a>
+        <a href="/orders/ <%= p.id %>edit"><input type=submit value="Edit"></a><br>
+        <a href="/orders/<%= p.id %>delete"><input type=submit value="Delete"></a>
     <% end %>
   </p>
 <% end %>

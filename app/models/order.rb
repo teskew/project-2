@@ -1,3 +1,3 @@
-class Order < ActiveRecord::Base
+class Order < ActiveRecord::Base #inherited from
     belongs_to :user
 end

@@ -1,11 +1,11 @@
 
  # Brewery companies info - Sinatra Edition
-   The application is about the companies information system  when a new user  want  an information they have to sign up first
-    if  signup or log in  incorrectly, It redirect them back to the root page 
+   The application is about the Brewery companies information system 
+    when a new user want  an the information they have to sign up first
+   if  signup or log in  incorrectly, It redirect them back to the root page. 
    If a user tries to signup with account information that already exists, there is  a flash message tells their file is in our the company list 
-  the user will  know where to go 
-   because i add up  navbar.
-   the  logout button is somewhere inside, after they log in 
+   the user will  know where to go because i add up  navbar  in each page.
+    the  logout button is  inside  navabar, after they log in 
   if the users put wrong data it will show them an error message "It IS NOT IN OUR FILE"    
 # How the app was build
 Install the required Ruby Gems  such as sinatra gem  to gem file and install using the following command:
